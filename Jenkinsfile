@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/manister7/docker-demo.git', branch: 'main'
+                git url: 'https://github.com/manister7/docker-demo.git', 
+                branch: 'main',
+                credentialsId: 'd0f593bf-63bd-4a22-892d-297751f334c7'
             }
         }
  
@@ -16,13 +18,13 @@ pipeline {
  
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 5000:5000 --name docker-demo docker-demo:latest'
+                sh 'docker run -d -p 6000:6000 --name docker-demo docker-demo:latest'
             }
         }
  
         stage('Verify') {
             steps {
-                sh 'curl -s http://localhost:5000'
+                sh 'curl -s http://localhost:6000'
             }
         }
     }
